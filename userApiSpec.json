@@ -2,28 +2,30 @@
     "openapi":"3.1.0",
     "info":
     {
-        "title":"api wisata pandeglang",
-        "description":"untuk menampilkan seluruh wisata pandeglang"
+        "title":"user api",
+        "description":"api untuk user menegament wisata"
     },
-    "server":
+    "servers":
     [
-        {"url":"http:://wisata.pdg.id"}
+        {
+            "url":"wisata.pdg.id/user"
+        }
     ],
 
     "components":
     {
-        "SecuritySchemes":
+        "securitySchemes":
         {
-            "JwtAuth":
+            "jwtAuth":
             {
                 "type":"http",
-                "format":"bearer",
-                "bearerScheme":"JWT"
+                "scheme":"bearer",
+                "bearerFormat":"JWT"
             }
         },
         "requestBody":
         {
-            "wisata":
+            "user":
             {
                 "type":"object",
                 "properties":
@@ -33,118 +35,248 @@
                         "type":"integer",
                         "example":"1"
                     },
-                    "nama_wisata":
+                    "name":
                     {
                         "type":"string",
-                        "example":"curug pandeglang"
+                        "example":"yadi"
                     },
-                    "alamat_wisata":
+                    "email":
                     {
                         "type":"string",
-                        "example":"kp.carita jl.raya labuan"
+                        "example":"yadi@gmail.com"
                     },
-                    "tiket":
+                    "password":
                     {
                         "type":"string",
-                        "example":"3000"
-                    },
-                    "jam_operasiona":
-                    {
-                        "type":"string",
-                        "example":"08:00-20:00"
-                    },
-                    "deskripsi":
-                    {
-                        "type":"string",
-                        "example":"wisata alam pdg"
-                    },
-                    "gambar":
-                    {
-                        "type":"file",
-                        "example":"curug.png"
+                        "example":"124435"
                     }
                 }
             }
         },
         "responses":
         {
-            "type":"object",
-            "properties":
+            "failed":
             {
-                "failed":
+                "type":"object",
+                "properties":
                 {
-                    "type":"string",
-                    "example":"400"
+                    "failed":
+                    {
+                        "example":"400"
+                    }
                 }
             }
         }
     },
+    "security":
+    [
+        {
+            "jwtAuth":[]
+        }
+    ],
+
     "paths":
     {
-       
-        "/add/wisata":
+        "/user":
         {
             "post":
             {
-                "security":
+                "parameters":
                 [
-                    {"JwtAuth":[]}
-                ],
-            
-            "parameters":
-            [
-                {
-                    "name":"bearerToken",
-                    "in":"header"
-                }
-            ],
-            "requestBody":
-            {
-                "required":true,
-                "description":"form untuk wisata",
-                "content":
-                {
-                    "application/json":
                     {
-                        "schema":
-                        {
-                            "$ref":"#/components/requestBody/wisata"
-                        }
+                        "name":"Authorization",
+                        "in":"header"
                     }
-                }
-            },
-            "responses":
-            {
-                "200":
+                ],
+                "requestBody":
                 {
-                    "description":"success",
+                    "required":true,
+                    "description":"untuk mengirim data user",
                     "content":
                     {
                         "application/json":
                         {
                             "schema":
                             {
-                                "$ref":"#/components/requestBody/wisata"
+                                "$ref":"#/components/requestBody/user"
                             }
                         }
                     }
                 },
-                "400":
+                "responses":
                 {
-                    "description":"failed",
+                    "200":
+                    {
+                        "description":"success",
+                        "content":
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/requestBody/user"
+                                }
+                            }
+                        }
+                    },
+                    "400":
+                    {
+                        "description":"failed",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/responses/failed"
+                                }
+                            }
+                        }
+                    }
+                }
+
+            },
+            "get":
+            {
+                "parameters":
+                [
+                    {
+                        "name":"Authorization",
+                        "in":"header"
+                    }
+                ],
+                
+                "responses":
+                {
+                    "200":
+                    {
+                        "description":"success",
+                        "content":
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/requestBody/user"
+                                }
+                            }
+                        }
+                    },
+                    "400":
+                    {
+                        "description":"failed",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/responses/failed"
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+        "/user/{user_id}":
+        {
+            "patch":
+            {
+                "parameters":
+                [
+                    {
+                        "name":"Authorization",
+                        "in":"header"
+                    },
+                    {
+                        "name":"id",
+                        "in":"path"
+                    }
+                ],
+                "requestBody":
+                {
+                    "required":true,
+                    "description":"untuk mengirim data user",
                     "content":
                     {
                         "application/json":
                         {
                             "schema":
                             {
-                                "$ref":"#/components/responses"
+                                "$ref":"#/components/requestBody/user"
+                            }
+                        }
+                    }
+                },
+                "responses":
+                {
+                    "200":
+                    {
+                        "description":"success",
+                        "content":
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/requestBody/user"
+                                }
+                            }
+                        }
+                    },
+                    "400":
+                    {
+                        "description":"failed",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/responses/failed"
+                                }
                             }
                         }
                     }
                 }
+
+            },
+            "delete":
+            {
+                "parameters":
+                [
+                    {
+                        "name":"Authorization",
+                        "in":"header"
+                    }
+                ],
+                
+                "responses":
+                {
+                    "200":
+                    {
+                        "description":"success"
+                        
+                    },
+                    "400":
+                    {
+                        "description":"failed",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/responses/failed"
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
-            }
     }
 }
