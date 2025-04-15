@@ -10,4 +10,15 @@ class Wisata extends Model
     use HasFactory;
 
     protected $table = 'wisata';
+
+    protected $fillable =
+    [
+            "id" ,
+            "nama_wisata" ,
+            "alamat_wisata",
+            "tiket",
+            "jam_operasional",
+            "deskripsi",
+            "gambar"
+    ];
 }
