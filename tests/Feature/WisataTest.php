@@ -28,7 +28,6 @@ class WisataTest extends TestCase
         
     }
 
-    public function testGetData()
-    {}
+ 
     
 }
