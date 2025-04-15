@@ -27,5 +27,8 @@ class WisataTest extends TestCase
         ->assertJson(['message'=>"success"]);
         
     }
+
+    public function testGetData()
+    {}
     
 }
