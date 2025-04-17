@@ -32,7 +32,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 Route::controller(App\Http\Controllers\WisataController::class)->prefix('wisata')->middleware(["auth:api"])->group(function()
 {
+    Route::get('/','getWisata');
     Route::post('/add','postWisata');
+    Route::patch('/update/{id}','updateWisata');
+    Route::delete('/delete/{id}','delete');
 });
 Route::post('/login', [App\Http\Controllers\AuthController::class, 'login']);
 

@@ -13,7 +13,7 @@ class WisataTest extends TestCase
     {
         $file = UploadedFile::fake()->create('curug.png');
 
-        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDczMjA4MywiZXhwIjoxNzQ0NzM1Njg0LCJuYmYiOjE3NDQ3MzIwODQsImp0aSI6IlRvd3RpQ1Frb0N5SGJRV0UiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9._Xo1Nn9npKBV8TyMxemlro0TiZtc_qn2W959ZAdFj8I"])
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDg5OTYwMywiZXhwIjoxNzQ0OTAzMjAzLCJuYmYiOjE3NDQ4OTk2MDMsImp0aSI6ImZsZWE0TzlPcllpOU9teFciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PXCyry3C-oWFZ2omrNMM34-VmIs48pKxG_Qum1RMsLc"])
         ->post('/api/wisata/add',
         [
             'nama_wisata'=>'curug carita',
@@ -26,6 +26,46 @@ class WisataTest extends TestCase
         ->assertStatus(201)
         ->assertJson(['message'=>"success"]);
         
+    }
+
+    public function testUpdateWisataa()
+    {
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDg5OTYwMywiZXhwIjoxNzQ0OTAzMjAzLCJuYmYiOjE3NDQ4OTk2MDMsImp0aSI6ImZsZWE0TzlPcllpOU9teFciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PXCyry3C-oWFZ2omrNMM34-VmIs48pKxG_Qum1RMsLc"])
+        ->patch('/api/wisata/update/1',['tiket'=>"70000"])
+        ->assertStatus(200)
+        ->assertJson(["message"=>"data berhasil diubah"]);
+    }
+
+    public function testUpdateWisataFailed()
+    {
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDg5OTYwMywiZXhwIjoxNzQ0OTAzMjAzLCJuYmYiOjE3NDQ4OTk2MDMsImp0aSI6ImZsZWE0TzlPcllpOU9teFciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PXCyry3C-oWFZ2omrNMM34-VmIs48pKxG_Qum1RMsLc"])
+        ->patch('/api/wisata/update/1',[''])
+        ->assertStatus(400)
+        ->assertJson(["message"=>"data gagal diubah"]);
+    }
+
+    public function testGetData()
+    {
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDg5OTYwMywiZXhwIjoxNzQ0OTAzMjAzLCJuYmYiOjE3NDQ4OTk2MDMsImp0aSI6ImZsZWE0TzlPcllpOU9teFciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PXCyry3C-oWFZ2omrNMM34-VmIs48pKxG_Qum1RMsLc"])
+        ->get('/api/wisata/')
+        ->assertStatus(200)
+        ->assertJson([""]);
+    }
+
+    public function testDelete()
+    {
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDg5OTYwMywiZXhwIjoxNzQ0OTAzMjAzLCJuYmYiOjE3NDQ4OTk2MDMsImp0aSI6ImZsZWE0TzlPcllpOU9teFciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PXCyry3C-oWFZ2omrNMM34-VmIs48pKxG_Qum1RMsLc"])
+        ->delete('api/wisata/delete/3')
+        ->assertStatus(200)
+        ->assertJson(["message"=>"berhasil dihapus"]);
+    }
+
+    public function testDeleteFail()
+    {
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDg5OTYwMywiZXhwIjoxNzQ0OTAzMjAzLCJuYmYiOjE3NDQ4OTk2MDMsImp0aSI6ImZsZWE0TzlPcllpOU9teFciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PXCyry3C-oWFZ2omrNMM34-VmIs48pKxG_Qum1RMsLc"])
+        ->delete('api/wisata/delete/3')
+        ->assertStatus(400)
+        ->assertJson(["message"=>"data tidak ditemukan"]);
     }
 
  
