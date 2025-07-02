@@ -22,7 +22,7 @@ class WisataResource extends JsonResource
             "tiket"=>$this->tiket,
             "operasional"=>$this->jam_operasional,
             "deskripsi"=>$this->deskripsi,
-            "gambar"=> '/public/image/'.$this->gambar,
+            "gambar"=> asset('storage/gambar/'.$this->gambar),
             "url_update"=> url('api/wisata/update/'.$this->id),
             "url_delete"=> url('api/wisata/delet/'.$this->id)
         ];

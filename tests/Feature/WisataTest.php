@@ -46,7 +46,7 @@ class WisataTest extends TestCase
 
     public function testGetData()
     {
-        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc0NDg5OTYwMywiZXhwIjoxNzQ0OTAzMjAzLCJuYmYiOjE3NDQ4OTk2MDMsImp0aSI6ImZsZWE0TzlPcllpOU9teFciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.PXCyry3C-oWFZ2omrNMM34-VmIs48pKxG_Qum1RMsLc"])
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTc1MDU5OTY2NSwiZXhwIjoxNzUwNjAzMjY1LCJuYmYiOjE3NTA1OTk2NjYsImp0aSI6IkZzTndUY3o2MDhyQUt0UksiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Tmdpkbv_rwcTQW0I0lScP-5TY3w8KPIvVmER5ctT3zU"])
         ->get('/api/wisata/')
         ->assertStatus(200)
         ->assertJson([""]);
