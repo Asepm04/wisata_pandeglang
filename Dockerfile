@@ -42,3 +42,4 @@ EXPOSE 80
 
 # Jalankan Apache di foreground
 CMD ["apache2-foreground"]
+CMD sh -c "php artisan serve --host=0.0.0.0 --port=${PORT}"
