@@ -1,6 +1,8 @@
 {
   "build": {
-    "installCommand": "composer install --no-dev --optimize-autoloader",
-    "postInstallCommand": "php artisan config:cache && php artisan migrate --force"
+    "env": {
+      "APP_ENV": "production"
+    },
+    "dockerfilePath": "Dockerfile"
   }
 }
