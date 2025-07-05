@@ -36,6 +36,8 @@ RUN chown -R www-data:www-data /var/www/html \
 
 # Jalankan perintah build Laravel jika diperlukan
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+RUN php artisan config:cache
+RUN php artisan migrate --force
 
 # Port default Apache
 EXPOSE 80
