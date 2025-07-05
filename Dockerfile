@@ -42,4 +42,4 @@ EXPOSE 80
 
 # Jalankan Apache di foreground
 CMD ["apache2-foreground"]
-CMD sh -c "php -S 0.0.0.0:${PORT} -t public"
+CMD sh -c php -S 0.0.0.0:${PORT} -t public
