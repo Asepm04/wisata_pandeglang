@@ -39,3 +39,5 @@ Route::controller(App\Http\Controllers\WisataController::class)->prefix('wisata'
 });
 Route::post('/login', [App\Http\Controllers\AuthController::class, 'login']);
 
+ Route::get('/userWisata','getWisata');
+
