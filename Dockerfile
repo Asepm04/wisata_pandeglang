@@ -37,11 +37,9 @@ RUN chown -R www-data:www-data /var/www/html \
 # Jalankan perintah build Laravel jika diperlukan
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 RUN php artisan config:cache
-RUN php artisan migrate --force
+
 
 # Port default Apache
 EXPOSE 80
 
-# Jalankan Apache di foreground
-CMD ["apache2-foreground"]
 CMD sh -c php -S 0.0.0.0:8080 -t public
